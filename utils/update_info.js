@@ -1,12 +1,10 @@
 const basePath = process.cwd();
-const { NETWORK } = require(`${basePath}/constants/network.js`);
 const fs = require("fs");
 
 const {
   baseUri,
   description,
   namePrefix,
-  network,
 } = require(`${basePath}/src/config.js`);
 
 // read json data
