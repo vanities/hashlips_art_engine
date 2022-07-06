@@ -4,7 +4,7 @@ const { MODE } = require(`${basePath}/constants/blend_mode.js`);
 // General metadata for Ethereum
 const namePrefix = "Your Collection";
 const description = "Remember to replace this description";
-const baseUri = "ipfs://___ipfs___";
+const baseUri = "ipfs://___cid___";
 
 const layerConfigurations = [
   {
@@ -62,10 +62,10 @@ const rarityDelimiter = "#";
 const uniqueDnaTorrance = 10_000;
 
 const preview = {
-  thumbPerRow: 5,
-  thumbWidth: 50,
+  thumbPerRow: 100,
+  thumbWidth: format.width / 8,
   imageRatio: format.height / format.width,
-  imageName: "preview.png",
+  imageName: "collection.png",
 };
 
 module.exports = {
