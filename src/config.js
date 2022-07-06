@@ -33,9 +33,9 @@ const debugLogs = false;
 
 const background = {
   generate: false,
-  brightness: "80%",
-  static: false,
-  default: "#000000",
+  brightness: "100%",
+  static: true,
+  default: "#ffffff",
 };
 
 const rarityDelimiter = "#";
