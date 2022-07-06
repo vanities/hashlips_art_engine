@@ -5,16 +5,16 @@ const { createCanvas, loadImage } = require(`${basePath}/node_modules/canvas`);
 const buildDir = `${basePath}/build`;
 const layersDir = `${basePath}/layers`;
 const {
-  format,
-  baseUri,
+  namePrefix,
   description,
-  background,
-  uniqueDnaTorrance,
+  baseUri,
+  format,
   layerConfigurations,
-  rarityDelimiter,
   shuffleLayerConfigurations,
   debugLogs,
-  namePrefix,
+  background,
+  rarityDelimiter,
+  uniqueDnaTorrance,
 } = require(`${basePath}/src/config.js`);
 const canvas = createCanvas(format.width, format.height);
 const ctx = canvas.getContext("2d");
