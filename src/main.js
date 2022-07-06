@@ -22,7 +22,7 @@ ctx.imageSmoothingEnabled = format.smoothing;
 var metadataList = [];
 var attributesList = [];
 var dnaList = new Set();
-const DNA_DELIMITER = "-";
+const DNA_DELIMITER = "_";
 
 const buildSetup = () => {
   if (fs.existsSync(buildDir)) {
@@ -61,7 +61,7 @@ const getElements = (path) => {
     .readdirSync(path)
     .filter((item) => !/(^|\/)\.[^\/\.]/g.test(item))
     .map((i, index) => {
-      if (i.includes("-")) {
+      if (i.includes(DNA_DELIMITER)) {
         throw new Error(`layer name can not contain dashes, please fix: ${i}`);
       }
       return {
