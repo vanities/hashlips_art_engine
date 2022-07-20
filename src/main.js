@@ -22,7 +22,7 @@ ctx.imageSmoothingEnabled = format.smoothing;
 var metadataList = [];
 var attributesList = [];
 var dnaList = new Set();
-const DNA_DELIMITER = "_";
+const DNA_DELIMITER = "@";
 
 const buildSetup = () => {
   if (fs.existsSync(buildDir)) {
