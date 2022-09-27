@@ -7,8 +7,8 @@ const description = "Description...";
 const baseUri = "ipfs://___cid___";
 
 const format = {
-  width: 2048,
-  height: 2048,
+  width: 2_048,
+  height: 2_048,
   smoothing: false,
 };
 
