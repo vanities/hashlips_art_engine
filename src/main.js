@@ -275,7 +275,7 @@ function shuffle(array) {
   return array;
 }
 
-const startCreating = async () => {
+const chooseDnas = async () => {
   let layerConfigIndex = 0;
   let editionCount = 1;
   let failedCount = 0;
@@ -293,6 +293,7 @@ const startCreating = async () => {
   debugLogs
     ? console.log("Editions left to create: ", abstractedIndexes)
     : null;
+  let createList = [];
   while (layerConfigIndex < layerConfigurations.length) {
     const layers = layersSetup(
       layerConfigurations[layerConfigIndex].layersOrder
@@ -302,38 +303,13 @@ const startCreating = async () => {
     ) {
       let newDna = createDna(layers);
       if (isDnaUnique(dnaList, newDna)) {
-        let results = constructLayerToDna(newDna, layers);
-        let loadedElements = [];
-
-        results.forEach((layer) => {
-          loadedElements.push(loadLayerImg(layer));
+        createList.push({
+          newDna,
+          editionCount,
+          index: abstractedIndexes[0],
+          layerConfigIndex,
         });
 
-        await Promise.all(loadedElements).then((renderObjectArray) => {
-          debugLogs ? console.log("Clearing canvas") : null;
-          ctx.clearRect(0, 0, format.width, format.height);
-          if (background.generate) {
-            drawBackground();
-          }
-          renderObjectArray.forEach((renderObject, index) => {
-            drawElement(
-              renderObject,
-              index,
-              layerConfigurations[layerConfigIndex].layersOrder.length
-            );
-          });
-          debugLogs
-            ? console.log("Editions left to create: ", abstractedIndexes)
-            : null;
-          saveImage(abstractedIndexes[0]);
-          addMetadata(newDna, abstractedIndexes[0]);
-          saveMetaDataSingleFile(abstractedIndexes[0]);
-          console.log(
-            `Created edition: ${abstractedIndexes[0]}, with DNA: ${sha1(
-              newDna
-            )}`
-          );
-        });
         dnaList.add(filterDNAOptions(newDna));
         editionCount++;
         abstractedIndexes.shift();
@@ -351,6 +327,44 @@ const startCreating = async () => {
     layerConfigIndex++;
   }
   writeMetaData(JSON.stringify(metadataList, null, 2));
+  return createList;
 };
 
-module.exports = { startCreating, buildSetup, getElements };
+const createDnas = async (createList) => {
+  const allLayers = [];
+  for (let i = 0; i < layerConfigurations.length; ++i) {
+    allLayers.push(layersSetup(layerConfigurations[i].layersOrder));
+  }
+  for (const { newDna, editionCount, index, layerConfigIndex } of createList) {
+    const layers = allLayers[layerConfigIndex];
+    let results = constructLayerToDna(newDna, layers);
+    let loadedElements = [];
+
+    results.forEach((layer) => {
+      loadedElements.push(loadLayerImg(layer));
+    });
+
+    await Promise.all(loadedElements).then((renderObjectArray) => {
+      debugLogs ? console.log("Clearing canvas") : null;
+      ctx.clearRect(0, 0, format.width, format.height);
+      if (background.generate) {
+        drawBackground();
+      }
+      renderObjectArray.forEach((renderObject, index) => {
+        drawElement(
+          renderObject,
+          index,
+          layerConfigurations[layerConfigIndex].layersOrder.length
+        );
+      });
+      saveImage(abstractedIndexes[0]);
+      addMetadata(newDna, abstractedIndexes[0]);
+      saveMetaDataSingleFile(abstractedIndexes[0]);
+      console.log(
+        `Created edition: ${abstractedIndexes[0]}, with DNA: ${sha1(newDna)}`
+      );
+    });
+  }
+};
+
+module.exports = { chooseDnas, createDnas, buildSetup, getElements };

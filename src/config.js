@@ -6,6 +6,9 @@ const namePrefix = "NFT";
 const description = "Description...";
 const baseUri = "ipfs://___cid___";
 
+const numWorkers = 1;
+const batchSize = 1; // only matters when numWorkers > 1
+
 const format = {
   width: 2_048,
   height: 2_048,
@@ -60,4 +63,7 @@ module.exports = {
   uniqueDnaTorrance,
 
   preview,
+
+  numWorkers,
+  batchSize,
 };
