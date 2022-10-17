@@ -17,7 +17,9 @@
     "rarity": "node utils/rarity.js",
     "preview": "node utils/preview.js",
     "update_info": "node utils/update_info.js",
-    "generate_metadata": "node utils/generate_metadata.js"
+    "generate_metadata": "node utils/generate_metadata.js",
+    "fs_rename": "node utils/fs_rename.js",
+    "put_files": "node utils/put_files.js"
   },
   "author": "Daniel Eugene Botha (HashLips)",
   "license": "MIT",
