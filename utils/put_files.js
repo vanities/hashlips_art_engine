@@ -1,7 +1,8 @@
-import * as dotenv from "dotenv";
-import process from "process";
-import minimist from "minimist";
-import { Web3Storage, getFilesFromPath } from "web3.storage";
+const dotenv = require("dotenv");
+const minimist = require("minimist");
+const web3Storage = require("web3.storage");
+Web3Storage = web3Storage.Web3Storage;
+getFilesFromPath = web3Storage.getFilesFromPath;
 
 async function main() {
   dotenv.config();
