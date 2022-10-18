@@ -48,7 +48,7 @@ files.forEach((file) => {
   }
 
   if (format) {
-    newFileName = newFileName.replace("-", " ");
+    newFileName = newFileName.replaceAll("-", " ");
   }
 
   //
