@@ -1,13 +1,13 @@
 var fs = require("fs");
 
-dirPath = "../lib/";
+dirPath = "./layers/Background/";
 
 const files = fs.readdirSync(dirPath);
 
 const rmPrefix = false;
 const rmExt = false;
 const format = true;
-const rewrite = false;
+const rewrite = true;
 
 const weights = [];
 

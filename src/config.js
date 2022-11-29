@@ -6,7 +6,7 @@ const namePrefix = "NFT";
 const description = "Description...";
 const baseUri = "ipfs://___cid___";
 
-const numWorkers = 1;
+const numWorkers = 24;
 const batchSize = 1; // only matters when numWorkers > 1
 
 const format = {
@@ -19,6 +19,7 @@ const layerConfigurations = [
   {
     growEditionSizeTo: 5,
     layersOrder: [
+      { name: "Background", options: { bypassDNA: true } },
       // { name: "" },
     ],
   },
